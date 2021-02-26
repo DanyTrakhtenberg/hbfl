@@ -7,7 +7,7 @@ AWS.config.update({ region: 'eu-north-1' })
 const ec2 = new AWS.EC2()
 const sgName = 'hamster_sg'
 const keyName = 'hamster_key'
-const instanceId = 'i-06b54e885210090db'
+const instanceId = 'i-0c1affa156d0e9f65'
 
 stopInstance(instanceId)
 .then(() => createInstance(sgName, keyName))
@@ -15,13 +15,13 @@ stopInstance(instanceId)
 
 function createInstance (sgName, keyName) {
   const params = {
-    ImageId: 'ami-0eb6f319b31f7092d',
+    ImageId: 'ami-02a6bfdcf8224bd77',
     InstanceType: 't3.micro',
     KeyName: keyName,
     MaxCount: 1,
     MinCount: 1,
     Placement: {
-      AvailabilityZone: 'eu-north-1b'
+      AvailabilityZone: 'eu-north-1c'
     },
     SecurityGroups: [
       sgName

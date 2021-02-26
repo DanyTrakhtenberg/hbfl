@@ -11,11 +11,11 @@ const keyName = 'hamster_key'
 var userData= `#!/bin/bash
 sudo apt-get update
 sudo apt-get -y install git
-git clone https://github.com/ryanmurakami/hbfl.git /home/bitnami/hbfl
+git clone https://github.com/DanyTrakhtenberg/hbfl.git /home/bitnami/hbfl
 chown -R bitnami: /home/bitnami/hbfl
 cd /home/bitnami/hbfl
 sudo npm i
-sudo node index.js
+sudo npm start
 `
 var userDataEncoded = new Buffer.from(userData).toString('base64');
 
@@ -98,7 +98,7 @@ function createKeyPair (keyName) {
 
 function createInstance (sgName, keyName) {
   const params = {
-    ImageId: 'ami-090bab37a2c8e2b55',
+    ImageId: 'ami-0e53d8b7d1e994ae2',
     InstanceType: 't3.micro',
     KeyName: keyName,
     MaxCount: 1,
