@@ -106,7 +106,8 @@ function createInstance (sgName, keyName) {
     SecurityGroups: [
       sgName
     ],
-    UserData: userDataEncoded
+    UserData: userDataEncoded,
+    IamInstanceProfile:{Name:'pizza-ec2-role'}
   }
 
   return new Promise((resolve, reject) => {

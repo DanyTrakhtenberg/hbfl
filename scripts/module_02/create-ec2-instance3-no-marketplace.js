@@ -1,17 +1,27 @@
 // Imports
-// TODO: Import the aws-sdk
 const AWS = require('aws-sdk')
 const helpers = require('./helpers')
-AWS.config.update({region:'eu-north-1'})
 
-// TODO: Configure region
-const ec2 = new AWS.EC2();
+AWS.config.update({ region: 'eu-north-1' })
+
 // Declare local variables
-// TODO: Create an ec2 object
+const ec2 = new AWS.EC2()
 const sgName = 'hamster_sg'
-const keyName = 'pizza-keys'
+const keyName = 'hamster_key'
+var userData= `#!/bin/bash
+curl --silent --location https://rpm.nodesource.com/setup_12.x | sudo bash -
+sudo yum install -y nodejs
+sudo yum install -y git
+git clone https://github.com/DanyTrakhtenberg/hbfl.git
+cd hbfl
+npm i
+sudo npm start
+`
+var userDataEncoded = new Buffer.from(userData).toString('base64');
 
-// Do all the things together
+
+
+// // Do all the things together
 // createSecurityGroup(sgName)
 // .then(() => {
 //   return createKeyPair(keyName)
@@ -73,14 +83,12 @@ function createSecurityGroup (sgName) {
   })
 }
 
-
 function createKeyPair (keyName) {
   const params = {
     KeyName: keyName
   }
 
   return new Promise((resolve, reject) => {
-    
     ec2.createKeyPair(params, (err, data) => {
       if (err) reject(err)
       else resolve(data)
@@ -98,7 +106,7 @@ function createInstance (sgName, keyName) {
     SecurityGroups: [
       sgName
     ],
-    UserData: 'IyEvYmluL2Jhc2gNCnN1ZG8gYXB0LWdldCB1cGRhdGUNCnN1ZG8gYXB0LWdldCAteSBpbnN0YWxsIGdpdA0KZ2l0IGNsb25lIGh0dHBzOi8vZ2l0aHViLmNvbS9yeWFubXVyYWthbWkvaGJmbC5naXQgL2hvbWUvYml0bmFtaS9oYmZsDQpjaG93biAtUiBiaXRuYW1pOiAvaG9tZS9iaXRuYW1pL2hiZmwNCmNkIC9ob21lL2JpdG5hbWkvaGJmbA0Kc3VkbyBucG0gaQ0Kc3VkbyBucG0gcnVuIHN0YXJ0'
+    UserData: userDataEncoded
   }
 
   return new Promise((resolve, reject) => {
