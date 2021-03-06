@@ -7,7 +7,7 @@ AWS.config.update({ region: 'eu-north-1' })
 // Declare local variables
 const cf = new AWS.CloudFront()
 
-createDistribution('hamster-bucket-ryan')
+createDistribution('hamster-bucket-ryan2')
 .then(data => console.log(data))
 
 function createDistribution (bucketName) {
