@@ -1,4 +1,4 @@
-const base = 'https://d2fj0qy79x6dup.cloudfront.net'
+const base = 'https://d3u8d4ac19oy59.cloudfront.net'
 module.exports = {
   hamster1: base + '/images/hamster-1-final.png',
   hamster2: base + '/images/hamster-2-final.png',
